@@ -32,12 +32,24 @@ packets, no on-wire fields):
 
 - the stock SNR-weighted TX delay already makes strong links answer
   first — the "whisper" ordering is emergent;
-- this port adds **evidence-ranked census thresholds** on the yield path:
-  a node that clearly decoded a packet (**rx_snr ≥ 6 dB**) never yields
-  its rebroadcast to overheard copies; a medium-read node (**−4..6 dB**)
-  yields only after **3 corroborating copies**; a weak-read node keeps
-  the stock quick yield. Official firmware cancels on the first copy for
-  all of them.
+- **N3 census (yield path)**: a node that clearly decoded a packet
+  (**rx_snr ≥ 6 dB**) never yields its rebroadcast to overheard copies; a
+  medium-read node (**−4..6 dB**) yields only after **3 corroborating
+  copies**; a weak-read node keeps the stock quick yield. Official
+  firmware cancels on the first copy for all of them;
+- **SHEP2D rescue (watchdog regret, fully local)**: a node watches the
+  packets it suppressed; if a suppressed packet is never heard again,
+  that packet died at this hop. Sustained regret (**3 deaths** in a
+  30 s window) opens a bounded **rescue gate**: for a 45 s lease the node
+  forwards what it would have suppressed, strictly within a budget of
+  4 forwards — then the gate closes until regret builds again;
+- **CEF_BOOST congestion mode**: 30 s evidence windows over local
+  channel utilization (firmware ChannelUtilization) and overheard-copy
+  redundancy; after 3 consecutive busy+redundant windows (util ≥ 35%,
+  ≥ 2.5 copies/dupe) every rank yields at K=2 — protecting a saturated
+  channel. The FSM exits instantly on any rescue signal, and on real
+  quiet networks (0.15–3% utilization — see the research repo's
+  REAL_WORLD_CALIBRATION.md) it never triggers by design.
 
 Everything else — roles, ACK handling, hop limits, duty cycle, NextHop
 routing for DMs — is untouched upstream code. The whole mechanism is
@@ -61,17 +73,17 @@ These are relay-node targets (no audio devices are in scope of this port).
 ## Downloads (direct binaries)
 
 Prebuilt images with the feature ON, from the
-[**v2.8.2-n3.1 release**](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-n3.1)
-(built from source commit `2c1c205`, base upstream `v2.8.2 @ 9e4d301`):
+[**v2.8.2-ar.1 release**](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.1)
+(built from the three-layer source commit `e1521c776`, base upstream `v2.8.2 @ 9e4d301`; `main` may hold docs-only commits on top):
 
 | Device | Image | Direct link |
 |---|---|---|
-| Heltec V3 | OTA/app image (`.bin`) | [firmware-heltec-v3-2.8.2-n3.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v3-2.8.2-n3.bin) |
-| Heltec V3 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v3-2.8.2-n3.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v3-2.8.2-n3.factory.bin) |
-| Heltec V4 | OTA/app image (`.bin`) | [firmware-heltec-v4-2.8.2-n3.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v4-2.8.2-n3.bin) |
-| Heltec V4 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-n3.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v4-2.8.2-n3.factory.bin) |
-| RAK4631 | UF2 (drag & drop) | [firmware-rak4631-2.8.2-n3.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-rak4631-2.8.2-n3.uf2) |
-| RAK4631 | hex (SWD/programmer) | [firmware-rak4631-2.8.2-n3.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-rak4631-2.8.2-n3.hex) |
+| Heltec V3 | OTA/app image (`.bin`) | [firmware-heltec-v3-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-heltec-v3-2.8.2-ar.bin) |
+| Heltec V3 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v3-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-heltec-v3-2.8.2-ar.factory.bin) |
+| Heltec V4 | OTA/app image (`.bin`) | [firmware-heltec-v4-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-heltec-v4-2.8.2-ar.bin) |
+| Heltec V4 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-heltec-v4-2.8.2-ar.factory.bin) |
+| RAK4631 | UF2 (drag & drop) | [firmware-rak4631-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-rak4631-2.8.2-ar.uf2) |
+| RAK4631 | hex (SWD/programmer) | [firmware-rak4631-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.1/firmware-rak4631-2.8.2-ar.hex) |
 
 Which file to use:
 - **Heltec V3/V4, first flash or recovery** → the `.factory.bin` (single
@@ -183,12 +195,16 @@ research repo for full tables, raw panels and audit documents.
 
 ## Scope and status
 
-Ported and built (this repository): **N3 ranked whisper census** (MVP,
-~650 bytes of flash on ESP32-S3).
+Ported and built (this repository, release `v2.8.2-ar.1`): **all three
+validated layers** — N3 ranked whisper census, SHEP2D local rescue
+(regret → bounded rescue gate) and CEF_BOOST congestion FSM. Flash cost:
+~2.0-4.1 KB (see the release size table); static RAM ~1.5 KB.
 
-Planned next stages (researched and validated in simulation, not yet
-ported): SHEP2D bounded rescue (watchdog/regret layer), CEF_BOOST
-congestion mode.
+Nothing else touches the stock path. Out of scope per the research
+doctrine (needs a protocol change, deferred): the simulator's COLLECT
+broadcast lease coordinating NEIGHBOR gates — the port implements the
+local self-rescue semantics, same trigger, same lease/budget, no new
+packets on air.
 
 ## License
 

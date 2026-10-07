@@ -117,8 +117,11 @@ firmware and restore with `meshtastic --configure my-backup-2026-10-07.yaml`.
 ### Heltec V3 / V4 (ESP32-S3)
 
 1. Install the USB driver (CP210x / CH9102) and connect via USB.
-2. Easiest — [Meshtastic web flasher](https://flasher.meshtastic.org)
-   does not host this experimental build; use one of:
+2. Easiest — [Meshtastic Web Flasher](https://flasher.meshtastic.org)
+   supports custom firmware: choose **Upload your own firmware release ZIP
+   or bin** and select the matching `.factory.bin` for your board. This
+   experimental build is not in the standard release list. Use Chrome or
+   Edge.
    - **esptool** (factory image, first flash / recovery):
      ```bash
      pip install esptool

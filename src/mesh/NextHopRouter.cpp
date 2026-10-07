@@ -1,4 +1,5 @@
 #include "NextHopRouter.h"
+#include "AdaptiveRelayN3.h"
 #include "Default.h"
 #include "MeshTypes.h"
 #include "Throttle.h"
@@ -294,6 +295,14 @@ bool NextHopRouter::perhapsRebroadcast(const meshtastic_MeshPacket *p)
                         (p->next_hop == NO_NEXT_HOP_PREFERENCE) ? FloodingRouter::send(tosend) : NextHopRouter::send(tosend);
                     if (res == ERRNO_SHOULD_RELEASE)
                         packetPool.release(tosend);
+
+#if ADAPTIVE_RELAY_N3
+                    // Adaptive Relay N3 (research port, build-time gated): our
+                    // rebroadcast is now pending in the TX queue — open the census
+                    // so overheard copies judge it against the evidence rank instead
+                    // of the stock first-copy yield.
+                    AdaptiveRelayN3::onRebroadcastQueued(p);
+#endif
 
                     return true;
                 }

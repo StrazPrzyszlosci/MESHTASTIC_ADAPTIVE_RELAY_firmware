@@ -1,4 +1,5 @@
 #include "FloodingRouter.h"
+#include "AdaptiveRelayN3.h"
 #include "MeshTypes.h"
 #include "NodeDB.h"
 #include "configuration.h"
@@ -137,9 +138,16 @@ bool FloodingRouter::roleAllowsCancelingDupe(const meshtastic_MeshPacket *p)
 void FloodingRouter::perhapsCancelDupe(const meshtastic_MeshPacket *p)
 {
     if (p->transport_mechanism == meshtastic_MeshPacket_TransportMechanism_TRANSPORT_LORA && roleAllowsCancelingDupe(p)) {
-        // cancel rebroadcast of this message *if* there was already one, unless we're a router!
-        // But only LoRa packets should be able to trigger this.
-        if (Router::cancelSending(p->from, p->id))
+        // Adaptive Relay N3 (research port, build-time gated): evidence-ranked
+        // census on the yield path. Stock yields on the first overheard copy
+        // (K=1); under ADAPTIVE_RELAY_N3 a pending rebroadcast of clear-read
+        // copies never yields, medium-evidence rebroadcasts yield only after
+        // AR_N3_K_MEDIUM corroborating copies. No census entry -> exact stock.
+        bool yield = true;
+#if ADAPTIVE_RELAY_N3
+        yield = AdaptiveRelayN3::shouldYieldOnDupe(p);
+#endif
+        if (yield && Router::cancelSending(p->from, p->id))
             txRelayCanceled++;
     }
     if (config.device.role == meshtastic_Config_DeviceConfig_Role_ROUTER_LATE && iface) {

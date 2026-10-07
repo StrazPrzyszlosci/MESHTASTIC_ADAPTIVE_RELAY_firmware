@@ -58,6 +58,29 @@ Release binaries in this repository are built **with the feature ON**.
 
 These are relay-node targets (no audio devices are in scope of this port).
 
+## Downloads (direct binaries)
+
+Prebuilt images with the feature ON, from the
+[**v2.8.2-n3.1 release**](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-n3.1)
+(built from source commit `2c1c205`, base upstream `v2.8.2 @ 9e4d301`):
+
+| Device | Image | Direct link |
+|---|---|---|
+| Heltec V3 | OTA/app image (`.bin`) | [firmware-heltec-v3-2.8.2-n3.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v3-2.8.2-n3.bin) |
+| Heltec V3 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v3-2.8.2-n3.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v3-2.8.2-n3.factory.bin) |
+| Heltec V4 | OTA/app image (`.bin`) | [firmware-heltec-v4-2.8.2-n3.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v4-2.8.2-n3.bin) |
+| Heltec V4 | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-n3.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-heltec-v4-2.8.2-n3.factory.bin) |
+| RAK4631 | UF2 (drag & drop) | [firmware-rak4631-2.8.2-n3.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-rak4631-2.8.2-n3.uf2) |
+| RAK4631 | hex (SWD/programmer) | [firmware-rak4631-2.8.2-n3.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-n3.1/firmware-rak4631-2.8.2-n3.hex) |
+
+Which file to use:
+- **Heltec V3/V4, first flash or recovery** → the `.factory.bin` (single
+  image at offset `0x0`).
+- **Heltec V3/V4, updating an existing Meshtastic device** → the `.bin`
+  (OTA partition image) via esptool/PlatformIO, or simply flash the
+  factory image again — both work.
+- **RAK4631** → the `.uf2` (double-tap reset, drag & drop).
+
 ## Before flashing: BACK UP
 
 Flashing over an existing Meshtastic device normally keeps its

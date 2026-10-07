@@ -2,6 +2,7 @@
 #include "AdaptiveRelayN3.h"
 #include "MeshTypes.h"
 #include "NodeDB.h"
+#include "airtime.h"
 #include "configuration.h"
 #include "mesh-pb-constants.h"
 #include "meshUtils.h"
@@ -139,12 +140,12 @@ void FloodingRouter::perhapsCancelDupe(const meshtastic_MeshPacket *p)
 {
     if (p->transport_mechanism == meshtastic_MeshPacket_TransportMechanism_TRANSPORT_LORA && roleAllowsCancelingDupe(p)) {
 #if ADAPTIVE_RELAY_N3
-        // Adaptive Relay N3 (research port, build-time gated): evidence-ranked
-        // census on the yield path. Stock yields on the first overheard copy
-        // (K=1); under N3 a pending rebroadcast of clear-read copies never
-        // yields, medium-evidence rebroadcasts yield only after
-        // AR_N3_K_MEDIUM corroborating copies.
-        if (AdaptiveRelayN3::shouldYieldOnDupe(p) && Router::cancelSending(p->from, p->id))
+        // Adaptive Relay (research port, build-time gated): evidence-ranked
+        // census (N3), local regret->rescue gate (SHEP2D) and the congestion
+        // FSM (CEF_BOOST) all decide inside shouldYieldOnDupe; the local
+        // channel utilization is the layer-3 congestion input.
+        if (AdaptiveRelayN3::shouldYieldOnDupe(p, airTime->channelUtilizationPercent()) &&
+            Router::cancelSending(p->from, p->id))
             txRelayCanceled++;
 #else
         // cancel rebroadcast of this message *if* there was already one, unless we're a router!

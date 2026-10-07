@@ -4,7 +4,7 @@
  * Adaptive Relay N3 — ranked whisper census (firmware port v1, MVP).
  *
  * Ported from the MESHTASTIC_ADAPTIVE_RELAY research project
- * (https://github.com/StrazPrzyszlosi/MESHTASTIC_ADAPTIVE_RELAY): the
+ * (https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY): the
  * N3 "ranked whisper" mechanism, validated in the discrete-event
  * simulator and confirmed to survive firmware-realistic observability
  * (REALISTIC_WIRE panel): the relay-side advantage does not depend on

@@ -8,7 +8,7 @@ build based on the official
 (commit `9e4d301`), extended with the **Adaptive Relay N3** routing
 mechanism — a feature that **does not exist in the official firmware**.
 It comes from the research project
-[StrazPrzyszlosi/MESHTASTIC_ADAPTIVE_RELAY](https://github.com/StrazPrzyszlosi/MESHTASTIC_ADAPTIVE_RELAY),
+[StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY),
 where it was designed, tuned and validated in the official Meshtasticator
 discrete-event simulator.
 
@@ -115,7 +115,7 @@ rest.
 ## Building from source
 
 ```bash
-git clone https://github.com/StrazPrzyszlosi/MESHTASTIC_ADAPTIVE_RELAY_firmware.git
+git clone https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware.git
 cd MESHTASTIC_ADAPTIVE_RELAY_firmware
 
 # PlatformIO 6.1.19 is required (6.2.x breaks on SCons tool packaging)

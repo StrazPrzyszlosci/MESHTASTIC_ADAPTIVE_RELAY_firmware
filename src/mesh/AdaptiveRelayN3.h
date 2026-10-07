@@ -43,9 +43,10 @@
 #include "MeshTypes.h"
 #include <stdint.h>
 
-// forward declaration (full type comes with the generated protobuf headers
-// at the call sites; the module only reads from/id/rx_snr fields)
-struct meshtastic_MeshPacket;
+// forward declaration (protobuf C bindings use a typedef; full type comes
+// with the generated headers at the call sites)
+struct _meshtastic_MeshPacket;
+typedef struct _meshtastic_MeshPacket meshtastic_MeshPacket;
 
 namespace AdaptiveRelayN3 {
 

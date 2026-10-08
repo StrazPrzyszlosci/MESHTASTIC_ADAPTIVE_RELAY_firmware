@@ -105,9 +105,10 @@ Which file to use:
   factory image again - both work.
 - **RAK4631 / Seeed XIAO nRF52840 kit** → the `.uf2` (double-tap reset,
   drag & drop).
-- **RAK4631 / Seeed XIAO kit, updating a running device** → the `.zip`
-  (DFU update package applied **by the bootloader** - via the
-  Meshtastic Web Flasher or a BLE firmware update).
+- **RAK4631 / Seeed XIAO kit, Web Flasher / BLE update** → the `.zip`
+  (DFU update package applied **by the bootloader** - see the Web Flasher
+  note in the installation section; or a BLE firmware update from the
+  Meshtastic phone app).
 
 **None of the nRF52840 images overwrite the bootloader or the SoftDevice.**
 Every shipped image contains only the application partition (verified
@@ -189,6 +190,18 @@ Same UF2 procedure as the RAK4631:
 2. Drag & drop
    `firmware-seeed_xiao_nrf52840_kit-2.8.2.<hash>.uf2` onto the drive.
 3. The drive disconnects and the board reboots into Meshtastic.
+
+**Web Flasher (`.zip`)**: the nRF52 path of
+[flasher.meshtastic.org](https://flasher.meshtastic.org) does **not**
+flash over the running firmware's serial port - it talks WebUSB-DFU
+**directly to the bootloader**. So the flow is: **double-tap RESET**
+(bootloader mode) → in Chrome/Edge choose _Upload your own firmware
+release ZIP or bin_ → select
+`firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip` → Connect → flash. The
+bootloader writes the app itself, so this is as bootloader-safe as the
+UF2 drag & drop. The same `.zip` can also be pushed over **BLE** as a
+firmware update from the Meshtastic phone app (also bootloader-applied
+DFU).
 
 Note: there are two Wio-SX1262 SKUs - this target is for the **Meshtastic
 kit** (XIAO nRF52840 + Wio-SX1262, Seeed SKU 102010710 / standalone

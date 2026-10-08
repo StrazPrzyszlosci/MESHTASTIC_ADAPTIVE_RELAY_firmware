@@ -91,8 +91,10 @@ built from `1c9f3598d` - only docs commits on top; base upstream
 | Heltec V4               | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v4-2.8.2-ar.factory.bin)             |
 | RAK4631                 | UF2 (drag & drop)                           | [firmware-rak4631-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.uf2)                                 |
 | RAK4631                 | hex (SWD/programmer)                        | [firmware-rak4631-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.hex)                                 |
+| RAK4631                 | DFU update package (`.zip`)                 | [firmware-rak4631-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.zip)                                 |
 | Seeed XIAO nRF52840 kit | UF2 (drag & drop)                           | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2) |
 | Seeed XIAO nRF52840 kit | hex (SWD/programmer)                        | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex) |
+| Seeed XIAO nRF52840 kit | DFU update package (`.zip`)                 | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip) |
 
 Which file to use:
 
@@ -103,6 +105,19 @@ Which file to use:
   factory image again - both work.
 - **RAK4631 / Seeed XIAO nRF52840 kit** → the `.uf2` (double-tap reset,
   drag & drop).
+- **RAK4631 / Seeed XIAO kit, updating a running device** → the `.zip`
+  (DFU update package applied **by the bootloader** - via the
+  Meshtastic Web Flasher or a BLE firmware update).
+
+**None of the nRF52840 images overwrite the bootloader or the SoftDevice.**
+Every shipped image contains only the application partition (verified
+from the `.hex` address map: `0x26000..0xCFB3C` on the RAK4631,
+`0x27000..0xCE8F4` on the XIAO kit; the MBR/SoftDevice sit at the bottom
+of flash, the bootloader at the top). The `.uf2` and the `.zip` are
+applied by the bootloader itself (USB drive / DFU), so they physically
+cannot overwrite it; the `.hex` is an app-only image for an SWD
+programmer - flash it **without** a mass-erase if you want the
+bootloader and SoftDevice preserved.
 
 ## Before flashing: BACK UP
 

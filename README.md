@@ -115,9 +115,21 @@ from the `.hex` address map: `0x26000..0xCFB3C` on the RAK4631,
 `0x27000..0xCE8F4` on the XIAO kit; the MBR/SoftDevice sit at the bottom
 of flash, the bootloader at the top). The `.uf2` and the `.zip` are
 applied by the bootloader itself (USB drive / DFU), so they physically
-cannot overwrite it; the `.hex` is an app-only image for an SWD
-programmer - flash it **without** a mass-erase if you want the
-bootloader and SoftDevice preserved.
+cannot overwrite it.
+
+> ⚠️ **Never use "erase all" / mass-erase / chip-erase on these devices**
+> (J-Link, `nrfjprog --eraseall`, pyocd, STM32CubeProgrammer "Erase
+> chip", etc.). It wipes the **entire chip** - bootloader, SoftDevice and
+> UICR settings included. The device then no longer boots and the UF2
+> drive never appears; recovery requires re-flashing the bootloader and
+> SoftDevice over SWD. Use only the safe methods:
+>
+> 1. **`.uf2`** - double-tap reset → drag & drop onto the UF2 drive
+>    (bootloader-applied, cannot touch itself);
+> 2. **`.zip`** - DFU update via the Meshtastic Web Flasher or a BLE
+>    firmware update (also bootloader-applied);
+> 3. **`.hex`** via SWD - app-only image, program **without any
+>    erase-all**; erasing only the application sectors is fine.
 
 ## Before flashing: BACK UP
 

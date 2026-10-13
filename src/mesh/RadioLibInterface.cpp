@@ -1,3 +1,5 @@
+// Radio-path file: keep LOG_DEBUG/INFO alive in MESHTASTIC_QUIET_LOG diagnostic builds.
+#define MESHTASTIC_RADIO_PATH_LOG 1
 #include "RadioLibInterface.h"
 #include "MeshTypes.h"
 #include "NodeDB.h"

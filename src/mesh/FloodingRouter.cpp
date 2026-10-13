@@ -1,3 +1,5 @@
+// Radio-path file: keep LOG_DEBUG/INFO alive in MESHTASTIC_QUIET_LOG diagnostic builds.
+#define MESHTASTIC_RADIO_PATH_LOG 1
 #include "FloodingRouter.h"
 #include "AdaptiveRelayN3.h"
 #include "MeshTypes.h"
@@ -144,8 +146,7 @@ void FloodingRouter::perhapsCancelDupe(const meshtastic_MeshPacket *p)
         // census (N3), local regret->rescue gate (SHEP2D) and the congestion
         // FSM (CEF_BOOST) all decide inside shouldYieldOnDupe; the local
         // channel utilization is the layer-3 congestion input.
-        if (AdaptiveRelayN3::shouldYieldOnDupe(p, airTime->channelUtilizationPercent()) &&
-            Router::cancelSending(p->from, p->id))
+        if (AdaptiveRelayN3::shouldYieldOnDupe(p, airTime->channelUtilizationPercent()) && Router::cancelSending(p->from, p->id))
             txRelayCanceled++;
 #else
         // cancel rebroadcast of this message *if* there was already one, unless we're a router!

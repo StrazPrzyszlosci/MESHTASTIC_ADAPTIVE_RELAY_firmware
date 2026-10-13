@@ -1,3 +1,5 @@
+// Radio-path file: keep LOG_DEBUG/INFO alive in MESHTASTIC_QUIET_LOG diagnostic builds.
+#define MESHTASTIC_RADIO_PATH_LOG 1
 #include "NextHopRouter.h"
 #include "AdaptiveRelayN3.h"
 #include "Default.h"
@@ -298,7 +300,7 @@ bool NextHopRouter::perhapsRebroadcast(const meshtastic_MeshPacket *p)
 
 #if ADAPTIVE_RELAY_N3
                     // Adaptive Relay N3 (research port, build-time gated): our
-                    // rebroadcast is now pending in the TX queue — open the census
+                    // rebroadcast is now pending in the TX queue - open the census
                     // so overheard copies judge it against the evidence rank instead
                     // of the stock first-copy yield.
                     AdaptiveRelayN3::onRebroadcastQueued(p);

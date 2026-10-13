@@ -64,8 +64,18 @@ extern MemGet memGet;
 // "Reusing slot aged %.3fs TRACE %s"). RedirectablePrint::write() already
 // mirrors every log character to RTT when USE_SEGGER is set.
 #if defined(DEBUG_PORT) && !defined(DEBUG_MUTE)
+// MESHTASTIC_QUIET_LOG: diagnostic-build switch. DEBUG/INFO compile out in
+// every translation unit except radio-path ones (those define
+// MESHTASTIC_RADIO_PATH_LOG before their first include of
+// DebugConfiguration.h - see the radio/router files). WARN/ERROR/CRIT
+// always stay on.
+#if defined(MESHTASTIC_QUIET_LOG) && !defined(MESHTASTIC_RADIO_PATH_LOG)
+#define LOG_DEBUG(...) ((void)0)
+#define LOG_INFO(...) ((void)0)
+#else
 #define LOG_DEBUG(...) DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_DEBUG, __VA_ARGS__)
 #define LOG_INFO(...) DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_INFO, __VA_ARGS__)
+#endif
 #define LOG_WARN(...) DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_WARN, __VA_ARGS__)
 #define LOG_ERROR(...) DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_ERROR, __VA_ARGS__)
 #define LOG_CRIT(...) DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_CRIT, __VA_ARGS__)

@@ -363,7 +363,15 @@ void waitUntilPowerLevelSafe()
  */
 void printInfo()
 {
+#if defined(MESHTASTIC_QUIET_LOG)
+    // Quiet diagnostic build: LOG_INFO is compiled out in this translation
+    // unit, so emit the structured repo/versions fingerprint line directly
+    // - logs from these builds stay attributable to this fork.
+    DEBUG_PORT.log(MESHTASTIC_LOG_LEVEL_INFO, "S:B:%d,%s,%s,%s", HW_VENDOR, optstr(APP_VERSION), optstr(APP_ENV),
+                   optstr(APP_REPO));
+#else
     LOG_INFO("S:B:%d,%s,%s,%s", HW_VENDOR, optstr(APP_VERSION), optstr(APP_ENV), optstr(APP_REPO));
+#endif
 }
 #ifndef PIO_UNIT_TESTING
 void setup()

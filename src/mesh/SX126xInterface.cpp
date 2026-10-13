@@ -1,4 +1,6 @@
 #if RADIOLIB_EXCLUDE_SX126X != 1
+// Radio-path file: keep LOG_DEBUG/INFO alive in MESHTASTIC_QUIET_LOG diagnostic builds.
+#define MESHTASTIC_RADIO_PATH_LOG 1
 #include "SX126xInterface.h"
 #include "configuration.h"
 #include "error.h"

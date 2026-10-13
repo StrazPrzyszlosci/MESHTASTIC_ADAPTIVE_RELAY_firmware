@@ -1,30 +1,30 @@
 #pragma once
 
 /**
- * Adaptive Relay — firmware port of the research routing layer
+ * Adaptive Relay - firmware port of the research routing layer
  * (https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY): the
  * full three-mechanism architecture validated in the official
  * Meshtasticator simulator, implemented as purely local heuristics.
  *
  * Three layers (build-time gated, all under ADAPTIVE_RELAY_N3):
  *
- * 1. N3 ranked whisper census — broadcast relay coordination on the
+ * 1. N3 ranked whisper census - broadcast relay coordination on the
  *    dupe-yield path. The stock SNR-weighted TX delay already orders
  *    responses (strong links first); this adds evidence-ranked census
  *    thresholds: clear reads never yield, medium reads yield after
  *    K corroborating copies, weak reads keep the stock quick yield.
  *
- * 2. SHEP2D bounded rescue (local port) — the node watches packets it
+ * 2. SHEP2D bounded rescue (local port) - the node watches packets it
  *    suppressed: if a suppressed packet is never heard again (it died at
  *    this hop), that is regret. Sustained regret opens a bounded rescue
  *    gate: for a short lease the node stops yielding (forwards what it
  *    would have suppressed), within a strict rescue budget. Research
  *    note: the simulator's COLLECT broadcast coordinated NEIGHBOR gates;
  *    a broadcast lease needs a protocol (protobuf) change, so this port
- *    implements the local, self-rescue semantics — same trigger, same
+ *    implements the local, self-rescue semantics - same trigger, same
  *    lease/budget bounds, no new packets on air.
  *
- * 3. CEF_BOOST congestion mode — a small FSM over local evidence
+ * 3. CEF_BOOST congestion mode - a small FSM over local evidence
  *    (channel utilization + overheard-copy redundancy). After sustained
  *    busy+redundant windows it switches to aggressive yielding (even
  *    strong reads yield quickly) to protect a saturated channel, and
@@ -33,13 +33,13 @@
  *    quiet networks sit at 0.15-3% utilization and never trigger it.
  *
  * Zero-oracle guarantee (research doctrine): every input is locally
- * observable — rx_snr of the relayed copy, (from,id), channel
+ * observable - rx_snr of the relayed copy, (from,id), channel
  * utilization, own timers. Copies are counted, not relayers (a real node
- * cannot attribute a relayed copy) — the REALISTIC_WIRE semantics under
+ * cannot attribute a relayed copy) - the REALISTIC_WIRE semantics under
  * which the mechanism was validated in simulation.
  *
  * Static budget (FIRMWARE_RESOURCE_MODEL.md): census 64 x ~16 B, park
- * 32 x ~12 B, FSM scalars — under 1.5 KB RAM total, no allocation.
+ * 32 x ~12 B, FSM scalars - under 1.5 KB RAM total, no allocation.
  *
  * OFF contract: the whole module is empty unless ADAPTIVE_RELAY_N3 is
  * defined; both call sites degrade to the exact stock decision path
@@ -56,14 +56,15 @@
 struct _meshtastic_MeshPacket;
 typedef struct _meshtastic_MeshPacket meshtastic_MeshPacket;
 
-namespace AdaptiveRelayN3 {
+namespace AdaptiveRelayN3
+{
 
 /** ---- layer 1: N3 census (evidence rank from the SNR of the copy
  *  we are relaying; port-v1 SNR-domain calibration) ---- */
 enum Rank {
-    RANK_STRONG = 0,   // clear read: never yield to the census (K=99)
-    RANK_MEDIUM = 1,   // corroborated yielding: K = AR_N3_K_MEDIUM
-    RANK_WEAK = 2      // near-silence only: K = AR_N3_K_WEAK
+    RANK_STRONG = 0, // clear read: never yield to the census (K=99)
+    RANK_MEDIUM = 1, // corroborated yielding: K = AR_N3_K_MEDIUM
+    RANK_WEAK = 2    // near-silence only: K = AR_N3_K_WEAK
 };
 
 #ifndef AR_N3_SNR_STRONG_DB
@@ -125,6 +126,10 @@ enum Rank {
 #define AR_CB_K 2 // yield threshold for ALL ranks while boosting
 #endif
 
+#ifndef AR_RELAY_LOG
+#define AR_RELAY_LOG 0 // 1 = verbose per-decision/event logging (diagnostic builds)
+#endif
+
 /** Called when our rebroadcast of `p` has been queued (TX pending).
  *  Opens/refreshes the census entry: count = 1 (the triggering copy),
  *  rank from p->rx_snr. Bounded static pool, oldest-eviction. */
@@ -133,7 +138,7 @@ void onRebroadcastQueued(const meshtastic_MeshPacket *p);
 /** Called from the stock dupe path AFTER the stock role gate passed.
  *  Counts the overheard copy, runs regret bookkeeping (layer 2) and
  *  the congestion window (layer 3), and decides:
- *    true  -> yield (cancel our pending rebroadcast) — stock K=1 for
+ *    true  -> yield (cancel our pending rebroadcast) - stock K=1 for
  *             packets without a census entry, or the effective
  *             threshold reached (census / boost / gate)
  *    false -> keep our pending rebroadcast

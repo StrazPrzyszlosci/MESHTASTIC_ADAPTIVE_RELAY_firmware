@@ -162,6 +162,17 @@ Flash them exactly like the quiet images above (same bootloader-safe
 methods). To grep the interesting part of a captured serial log:
 `grep -E "AR-|S:B:"`. Built from source commit `888212350`.
 
+## Beta testing
+
+If you run this firmware in a live network, please report back after at
+least 24 h of operation: fill in
+[BETA-TEST-FORM.md](BETA-TEST-FORM.md)
+([Polish](BETA-TEST-FORM.md#formularz-betatestowy--adaptive-relay-firmware-v282-ar2)
+· [English](BETA-TEST-FORM.md#beta-test-form--adaptive-relay-firmware-v282-ar2))
+and submit it as a GitHub issue. Boot reliability, Bluetooth, message
+delivery against stock nodes, ACKs, stability, `-log` captures - every
+data point helps validate the Adaptive Relay layer in the field.
+
 ## Before flashing: BACK UP
 
 Flashing over an existing Meshtastic device normally keeps its

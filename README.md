@@ -132,6 +132,36 @@ cannot overwrite it.
 > 3. **`.hex`** via SWD - app-only image, program **without any
 >    erase-all**; erasing only the application sectors is fine.
 
+## Diagnostic logging builds (`-log`)
+
+The same release also ships **`-log` images** for observing the Adaptive
+Relay layer in the field. Same routing behavior - logging only:
+
+- **verbose Adaptive Relay logging** (`AR-*` lines): every judged dupe
+  with full decision context (`from/id`, rx SNR, channel utilization,
+  copy count vs threshold, rank, rescue-gate state and budget, boost
+  state), census open/refresh/evict, park/unpark, deaths with the regret
+  count, rescue-gate open/close/budget-exhausted, per-window CEF_BOOST
+  summary, and a boot banner with the build version, **the repository
+  marker** and all tuned thresholds;
+- **everything unrelated to radio traffic is quieted**: DEBUG/INFO
+  compile out everywhere except the radio path (router/rebroadcast/ACK
+  decisions, radio driver, airtime) - telemetry, screen, NodeDB, BLE
+  and boot chatter disappear; WARN/ERROR always stay;
+- the structured `S:B:<hw>,<version>,<env>,<repo>` fingerprint line is
+  kept on the wire, so logs stay attributable to this fork.
+
+| Device                  | `-log` image                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Heltec V3               | [firmware-heltec-v3-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v3-2.8.2-ar-log.bin)                                                                                                                                                                                              |
+| Heltec V4               | [firmware-heltec-v4-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v4-2.8.2-ar-log.bin)                                                                                                                                                                                              |
+| RAK4631                 | [firmware-rak4631-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar-log.zip)                                                 |
+| Seeed XIAO nRF52840 kit | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.zip) |
+
+Flash them exactly like the quiet images above (same bootloader-safe
+methods). To grep the interesting part of a captured serial log:
+`grep -E "AR-|S:B:"`. Built from source commit `888212350`.
+
 ## Before flashing: BACK UP
 
 Flashing over an existing Meshtastic device normally keeps its
@@ -228,6 +258,11 @@ pio-venv/bin/pip install "platformio==6.1.19"
 
 # feature ON (as shipped in Releases):
 PLATFORMIO_BUILD_FLAGS="-DADAPTIVE_RELAY_N3=1" pio-venv/bin/pio run -e heltec-v3
+
+# feature ON + verbose Adaptive Relay logging + everything else quieted
+# (as shipped as the -log images):
+PLATFORMIO_BUILD_FLAGS="-DADAPTIVE_RELAY_N3=1 -DAR_RELAY_LOG=1 -DMESHTASTIC_QUIET_LOG" \
+    pio-venv/bin/pio run -e heltec-v3
 
 # feature OFF (byte-identical to upstream v2.8.2):
 pio-venv/bin/pio run -e heltec-v3

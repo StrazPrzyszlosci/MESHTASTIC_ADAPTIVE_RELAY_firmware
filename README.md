@@ -269,7 +269,9 @@ rest.
 git clone https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware.git
 cd MESHTASTIC_ADAPTIVE_RELAY_firmware
 
-# PlatformIO 6.1.19 is required (6.2.x breaks on SCons tool packaging)
+# Any recent PlatformIO works: the repo ships a SCons shim (bin/scons-shim,
+# activated by platformio.ini extra_scripts) that restores the modules
+# removed in SCons >= 4.9, which the ESP32 hybrid builds still import.
 python3 -m venv pio-venv
 pio-venv/bin/pip install "platformio==6.1.19"
 
@@ -287,11 +289,12 @@ pio-venv/bin/pio run -e heltec-v3
 
 Build the other targets with `-e heltec-v4` / `-e rak4631` /
 `-e seeed_xiao_nrf52840_kit`. The build path must not contain spaces. On
-ESP32-S3 targets the nested Arduino build may need a SCons shim depending
-on the PlatformIO version - if you hit
-`No module named 'SCons.Tool.FortranCommon'`, run the failing build with
-PlatformIO 6.1.19 (as pinned above), which avoids the broken scons-local
-package.
+ESP32 targets the hybrid (espidf) build still imports modules that SCons
+
+> = 4.9 removed; the in-repo shim (`bin/scons-shim`, wired into every
+> build via the `platformio.ini` extra_scripts) serves them from vendored
+> SCons 4.8.1 sources, so PlatformIO 6.2.x works out of the box - no
+> manual steps, no pinned scons version.
 
 The port code lives in `src/mesh/AdaptiveRelayN3.h/.cpp` with two
 integration points: `NextHopRouter::perhapsRebroadcast` (census opens

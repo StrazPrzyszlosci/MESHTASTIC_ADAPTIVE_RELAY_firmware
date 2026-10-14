@@ -1,5 +1,5 @@
-# SCons FortranCommon fallback, installed into site-packages via a .pth
-# (see .github/actions/setup-base/action.yml): SCons >= 4.9 removed
+# SCons FortranCommon fallback, loaded via sitecustomize.py in this
+# directory (see nested_pythonpath.py): SCons >= 4.9 removed
 # SCons.Tool.FortranCommon and SCons.Scanner.Fortran, which ESP-IDF-era
 # pioarduino build scripts still import on ESP32 hybrid builds under
 # platformio 6.2.x (tool-scons >= 4.9 packaging). The two fallback modules

@@ -77,7 +77,7 @@ variant (HW model 88).
 ## Downloads (direct binaries)
 
 Prebuilt images with the feature ON, from the
-[**v2.8.2-ar.2 release**](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.2)
+[**v2.8.2-ar.3 release**](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.3)
 (Heltec V3/V4 and RAK4631 binaries are unchanged from `v2.8.2-ar.1`, built
 from the three-layer source commit `e1521c776`; the Seeed XIAO kit image is
 built from `1c9f3598d` - only docs commits on top; base upstream
@@ -85,16 +85,16 @@ built from `1c9f3598d` - only docs commits on top; base upstream
 
 | Device                  | Image                                       | Direct link                                                                                                                                                                                         |
 | ----------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Heltec V3               | OTA/app image (`.bin`)                      | [firmware-heltec-v3-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v3-2.8.2-ar.bin)                             |
-| Heltec V3               | factory image (`.factory.bin`, first flash) | [firmware-heltec-v3-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v3-2.8.2-ar.factory.bin)             |
-| Heltec V4               | OTA/app image (`.bin`)                      | [firmware-heltec-v4-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v4-2.8.2-ar.bin)                             |
-| Heltec V4               | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v4-2.8.2-ar.factory.bin)             |
-| RAK4631                 | UF2 (drag & drop)                           | [firmware-rak4631-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.uf2)                                 |
-| RAK4631                 | hex (SWD/programmer)                        | [firmware-rak4631-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.hex)                                 |
-| RAK4631                 | DFU update package (`.zip`)                 | [firmware-rak4631-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar.zip)                                 |
-| Seeed XIAO nRF52840 kit | UF2 (drag & drop)                           | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2) |
-| Seeed XIAO nRF52840 kit | hex (SWD/programmer)                        | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex) |
-| Seeed XIAO nRF52840 kit | DFU update package (`.zip`)                 | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip) |
+| Heltec V3               | OTA/app image (`.bin`)                      | [firmware-heltec-v3-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v3-2.8.2-ar.bin)                             |
+| Heltec V3               | factory image (`.factory.bin`, first flash) | [firmware-heltec-v3-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v3-2.8.2-ar.factory.bin)             |
+| Heltec V4               | OTA/app image (`.bin`)                      | [firmware-heltec-v4-2.8.2-ar.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v4-2.8.2-ar.bin)                             |
+| Heltec V4               | factory image (`.factory.bin`, first flash) | [firmware-heltec-v4-2.8.2-ar.factory.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v4-2.8.2-ar.factory.bin)             |
+| RAK4631                 | UF2 (drag & drop)                           | [firmware-rak4631-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-rak4631-2.8.2-ar.uf2)                                 |
+| RAK4631                 | hex (SWD/programmer)                        | [firmware-rak4631-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-rak4631-2.8.2-ar.hex)                                 |
+| RAK4631                 | DFU update package (`.zip`)                 | [firmware-rak4631-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-rak4631-2.8.2-ar.zip)                                 |
+| Seeed XIAO nRF52840 kit | UF2 (drag & drop)                           | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.uf2) |
+| Seeed XIAO nRF52840 kit | hex (SWD/programmer)                        | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.hex) |
+| Seeed XIAO nRF52840 kit | DFU update package (`.zip`)                 | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar.zip) |
 
 Which file to use:
 
@@ -144,6 +144,12 @@ Relay layer in the field. Same routing behavior - logging only:
   count, rescue-gate open/close/budget-exhausted, per-window CEF_BOOST
   summary, and a boot banner with the build version, **the repository
   marker** and all tuned thresholds;
+- **the phone-to-LoRa message path stays visible** (`PACKET FROM PHONE`,
+  received-text and local-enqueue lines from PhoneAPI /
+  TextMessageModule / MeshService), so a capture shows whether a text
+  sent from the app reaches the node and whether it leaves on air -
+  this is what the first `-log` revision (`v2.8.2-ar.2`) silenced,
+  making a quiet console indistinguishable from "messages not going";
 - **everything unrelated to radio traffic is quieted**: DEBUG/INFO
   compile out everywhere except the radio path (router/rebroadcast/ACK
   decisions, radio driver, airtime) - telemetry, screen, NodeDB, BLE
@@ -153,14 +159,14 @@ Relay layer in the field. Same routing behavior - logging only:
 
 | Device                  | `-log` image                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Heltec V3               | [firmware-heltec-v3-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v3-2.8.2-ar-log.bin)                                                                                                                                                                                              |
-| Heltec V4               | [firmware-heltec-v4-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-heltec-v4-2.8.2-ar-log.bin)                                                                                                                                                                                              |
-| RAK4631                 | [firmware-rak4631-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-rak4631-2.8.2-ar-log.zip)                                                 |
-| Seeed XIAO nRF52840 kit | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.2/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.zip) |
+| Heltec V3               | [firmware-heltec-v3-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v3-2.8.2-ar-log.bin)                                                                                                                                                                                              |
+| Heltec V4               | [firmware-heltec-v4-2.8.2-ar-log.bin](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-heltec-v4-2.8.2-ar-log.bin)                                                                                                                                                                                              |
+| RAK4631                 | [firmware-rak4631-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-rak4631-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-rak4631-2.8.2-ar-log.zip)                                                 |
+| Seeed XIAO nRF52840 kit | [firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.uf2) + [.zip](https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/download/v2.8.2-ar.3/firmware-seeed_xiao_nrf52840_kit-2.8.2-ar-log.zip) |
 
 Flash them exactly like the quiet images above (same bootloader-safe
 methods). To grep the interesting part of a captured serial log:
-`grep -E "AR-|S:B:"`. Built from source commit `888212350`.
+`grep -E "AR-|S:B:"`. Built from source commit `49786bc13`.
 
 ## Beta testing
 
@@ -311,7 +317,7 @@ research repo for full tables, raw panels and audit documents.
 
 ## Scope and status
 
-Ported and built (this repository, release `v2.8.2-ar.2`): **all three
+Ported and built (this repository, release `v2.8.2-ar.3`): **all three
 validated layers** - N3 ranked whisper census, SHEP2D local rescue
 (regret → bounded rescue gate) and CEF_BOOST congestion FSM - on four
 relay targets (Heltec V3/V4, RAK4631, Seeed XIAO nRF52840 kit). Flash

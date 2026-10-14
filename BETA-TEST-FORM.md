@@ -1,4 +1,4 @@
-# Formularz betatestowy - Adaptive Relay Firmware (v2.8.2-ar.2)
+# Formularz betatestowy - Adaptive Relay Firmware (v2.8.2-ar.3)
 
 **[PL (ta sekcja)](#formularz-betatestowy--adaptive-relay-firmware-v282-ar2) · [EN (English)](#beta-test-form--adaptive-relay-firmware-v282-ar2)**
 
@@ -8,8 +8,8 @@ minimum **24 h** pracy urządzenia w Twojej sieci. Skopiuj treść,
 zamień `[ ]` na `[x]` przy wybranych odpowiedziach i wyślij jako
 **GitHub issue** w tym repozytorium (albo bezpośrednio do maintainera).
 
-Testowany firmware: release **v2.8.2-ar.2** z
-<https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.2>
+Testowany firmware: release **v2.8.2-ar.3** z
+<https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.3>
 
 ---
 
@@ -182,7 +182,7 @@ go na urządzenia, od których zależy Twoje bezpieczeństwo._
 
 ---
 
-# Beta test form - Adaptive Relay Firmware (v2.8.2-ar.2)
+# Beta test form - Adaptive Relay Firmware (v2.8.2-ar.3)
 
 **[PL (polski)](#formularz-betatestowy--adaptive-relay-firmware-v282-ar2) · [EN (this section)](#beta-test-form--adaptive-relay-firmware-v282-ar2)**
 
@@ -192,8 +192,8 @@ at least **24 h** of device operation in your network. Copy the content,
 change `[ ]` to `[x]` for your answers and submit it as a
 **GitHub issue** in this repository (or send it directly to the maintainer).
 
-Tested firmware: release **v2.8.2-ar.2** from
-<https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.2>
+Tested firmware: release **v2.8.2-ar.3** from
+<https://github.com/StrazPrzyszlosci/MESHTASTIC_ADAPTIVE_RELAY_firmware/releases/tag/v2.8.2-ar.3>
 
 ---
 

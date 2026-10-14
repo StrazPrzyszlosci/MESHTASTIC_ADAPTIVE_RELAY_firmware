@@ -3,6 +3,10 @@ concurrency:
   group: ci-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 on:
+  # Manual full-matrix run (e.g. to verify a CI-infra fix without waiting
+  # for the nightly schedule). Runs the same full board set as schedule.
+  workflow_dispatch:
+
   # The merge queue is the pre-merge gate for the protected branches (master,
   # develop): a merge_group run validates the merged result before code lands. For
   # now PRs and merge_group runs build the same narrowed board subset (--level pr);
